@@ -12,6 +12,9 @@ public class Maths
 
         //-------------------------
 
+        Naming myObj = new Naming();
+        System.out.println(myObj.x);
+
         // runtime errors
         // division by zero
 //        int x = 10;

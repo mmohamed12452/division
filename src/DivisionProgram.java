@@ -1,56 +1,71 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class DivisionProgram {
+public class DivisionProgram  {
     public static void main(String[] args) {
-        int num1;
-        int num2;
-        Integer result;
+        Scanner sc = new Scanner(System.in);
+        Integer a = null;
+        Integer b = null;
 
-
-        try (Scanner scanner = new Scanner(System.in)) {
-            // Get first number
-            while (true) {
-                System.out.print("Enter the first whole number: ");
+        try {
+            // --- Read first integer (with retries) ---
+            while (a == null) {
+                System.out.print("Enter the first integer: ");
+                String line = sc.nextLine();
                 try {
-                    num1 = scanner.nextInt();
-                    break;
-                } catch (InputMismatchException e) {
-                    System.out.println("That's not a valid whole number. Try again.");
-                    scanner.nextLine(); // clear the invalid input
+                    a = Integer.parseInt(line.trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a valid integer. Try again.");
                 }
             }
 
-            // entering the second number
-            while (true) {
-                System.out.print("Enter the second whole number (not zero): ");
+            // --- Read second integer (with retries), handle divide-by-zero later ---
+            while (b == null) {
+                System.out.print("Enter the second integer: ");
+                String line = sc.nextLine();
                 try {
-                    num2 = scanner.nextInt();
-                    if (num2 == 0) {
-                        System.out.println("Cannot divide by zero. Try again.");
-                    } else {
-                        break;
+                    b = Integer.parseInt(line.trim());
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a valid integer. Try again.");
+                }
+            }
+
+            // --- Compute division; handle divide-by-zero cleanly ---
+            int result;
+            while (true) {
+                try {
+                    result = a / b; // may throw ArithmeticException
+                    break;          // success, exit the loop
+                } catch (ArithmeticException e) {
+                    System.out.println("Cannot divide by zero. Please enter a NON-zero second integer:");
+                    // re-prompt ONLY for b
+                    while (true) {
+                        try {
+                            b = Integer.parseInt(sc.nextLine().trim());
+                            break;
+                        } catch (NumberFormatException nfe) {
+                            System.out.println("Not a valid integer. Try again:");
+                        }
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("That's not a valid whole number. Try again.");
-                    scanner.nextLine(); // clear the invalid input
                 }
             }
 
+            System.out.println(a + " / " + b + " = " + result);
 
-            result = (Integer) num1 / num2;
-            System.out.println("Result: " + result);
-
-            // Save result to file using try-with-resources
-            try (FileWriter writer = new FileWriter("result.txt")) {
-                writer.write("Result: " + result);
-                System.out.println("Result saved to result.txt");
-            } catch (IOException e) {
-                System.out.println("Error writing to file: " + e.getMessage());
+            // --- Write to file in its own try block ---
+            try (FileWriter fw = new FileWriter("result.txt")) {
+                fw.write(a + " / " + b + " = " + result + System.lineSeparator());
+                System.out.println("Saved to result.txt");
+            } catch (IOException ioe) {
+                System.out.println("Could not write to file: " + ioe.getMessage());
             }
-
-        } // scanner is automatically closed here
+        }
+        finally {
+            // finally runs whether exceptions happened or not
+            // (Scanner doesn't strictly require closing for System.in, but do it to practice.)
+            sc.close();
+        }
     }
 }
