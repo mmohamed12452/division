@@ -13,18 +13,23 @@ public class StackExample {
 
         System.out.println("Current Stack: " + myStack);
         System.out.println("The size of my stack is: " + myStack.size());
+
         myStack.push(40);
         myStack.pop();
         System.out.println("Current Stack: " + myStack);
         System.out.println("POPPED: " + myStack.pop());
+
         myStack.push(50);
         myStack.push(60);
         System.out.println("PEEK ELEMENT: " + myStack.peek());
         System.out.println("Current STACK AFTER PEEK is: " + myStack);
+
         myStack.push(70);
         System.out.println(" Is My Stack Empty:  " + myStack.isEmpty());
+
         myStack.push(80);
         myStack.pop();
+
         myStack.pop();
         myStack.pop();
         myStack.pop();

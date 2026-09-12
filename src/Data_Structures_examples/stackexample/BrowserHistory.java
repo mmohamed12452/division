@@ -54,8 +54,7 @@ public class BrowserHistory {
         // facebook
         // instagram
         // current page: twitter.com
-        //[google, facebook, instagram]
+        // [google, facebook, instagram]
         // twitter
-
     }
 }
