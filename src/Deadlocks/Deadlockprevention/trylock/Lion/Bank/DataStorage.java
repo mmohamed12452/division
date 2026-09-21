@@ -1,5 +1,7 @@
 package Deadlocks.Deadlockprevention.trylock.Lion.Bank;
 
+import Deadlocks.Deadlockprevention.trylock.BankAccount;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

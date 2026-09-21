@@ -12,7 +12,7 @@ public class StudentManager {
         int choice;
         do {
             showMenu();
-            choice = getIntInput("Enter your choice: ");
+            choice = getIntInput();
 
             switch (choice) {
                 case 1 -> addStudent();
@@ -37,7 +37,7 @@ public class StudentManager {
 
     // Add a new student
     private static void addStudent() {
-        int id = getIntInput("Enter student ID: ");
+        int id = getIntInput();
         String name = getStringInput("Enter student name: ");
         double grade = getDoubleInput("Enter student grade: ");
 
@@ -69,7 +69,7 @@ public class StudentManager {
             return;
         }
 
-        int id = getIntInput("Enter student ID to update: ");
+        int id = getIntInput();
         boolean found = false;
 
         for (Student s : students) {
@@ -97,7 +97,7 @@ public class StudentManager {
             return;
         }
 
-        int id = getIntInput("Enter student ID to delete: ");
+        int id = getIntInput();
         boolean removed = students.removeIf(s -> s.getId() == id);
 
         if (removed) {
@@ -109,8 +109,9 @@ public class StudentManager {
     }
 
     // Helper methods for input
-    private static int getIntInput(String prompt) {
+    public static int getIntInput() {
         while (true) {
+            boolean prompt = false;
             System.out.print(prompt);
             try {
                 return Integer.parseInt(scanner.nextLine());

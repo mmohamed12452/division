@@ -1,6 +1,6 @@
 package Deadlocks.Deadlockprevention.trylock.Lion.Bank;
 
-public class SavingsAccount extends BankAccount{
+public class SavingsAccount extends Account {
     private static final long serialVersionUID = 1L;
     private static final double MINIMUM_BALANCE = 1000.00;
 

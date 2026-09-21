@@ -2,14 +2,14 @@ package Deadlocks.Deadlockprevention.trylock.Lion.Bank;
 
 import java.io.Serializable;
 
-public abstract class BankAccount implements Serializable {
+public abstract class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String accountNumber;
     private Customer owner;
     protected double balance;
 
-    public BankAccount(String accountNumber, Customer owner, double initialBalance) {
+    public Account(String accountNumber, Customer owner, double initialBalance) {
         this.accountNumber = accountNumber;
         this.owner = owner;
         this.balance = initialBalance;
